@@ -1,5 +1,5 @@
 <h1 align="center">AiogramDialogShopBot</h1>
-
+<h2 align="center">Starting</h2>
 In .env:
 ```
 BOT_TOKEN=123456:Your-Token
@@ -51,7 +51,7 @@ And example of DB Url in .env for accessing postgres docker container or sqlite:
 # sqlalchemy - postgres
 DB_URL="postgresql+asyncpg://postgres:password@db:5432/db_name"
 ```
-<h1 align="center">Example</h1>
+<h1 align="center">Example of usage</h1>
 Images for menus are in misc/images. </br>
 Example of main menu after /start command:
 
