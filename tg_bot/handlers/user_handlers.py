@@ -21,6 +21,6 @@ def register_user_handlers(rt: Router) -> None:
 
 def user_router_configuration():
     user_router = Router()
-    # user_private_router.message.filter(ChatTypeFilter(["private"])) # filter for users if needed
+    # user_private_router.message.filter(ChatTypeFilter(["private"])) # If needed division between bot users
     register_user_handlers(user_router)
     return user_router
