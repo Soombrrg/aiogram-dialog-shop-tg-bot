@@ -1,0 +1,100 @@
+{
+  "categories": [
+    {
+      "name": "Meals",
+      "category_id": 1,
+      "items": []
+    },
+    {
+      "name": "Drinks",
+      "category_id": 2,
+      "items": []
+    }
+  ],
+  "products": [
+    {
+      "name": "Apple 🍎",
+      "product_id": 1,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Orange 🍊",
+      "product_id": 2,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Banana 🍌",
+      "product_id": 3,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Tomato 🍅",
+      "product_id": 4,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Potato 🥔",
+      "product_id": 5,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Carrot 🥕",
+      "product_id": 6,
+      "price": 1.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Milk 🥛",
+      "product_id": 7,
+      "price": 2.5,
+      "stock": 10,
+      "category_name": "Drinks"
+    },
+    {
+      "name": "Cream 🥛",
+      "product_id": 10,
+      "price": 3.5,
+      "stock": 10,
+      "category_name": "Drinks"
+    },
+    {
+      "name": "Ice Cream 🍨",
+      "product_id": 11,
+      "price": 4.5,
+      "stock": 10,
+      "category_name": "Meals"
+    },
+    {
+      "name": "Whipping Cream 🥛",
+      "product_id": 12,
+      "price": 5.5,
+      "stock": 10,
+      "category_name": "Drinks"
+    },
+    {
+      "name": "Sour Cream 🥛",
+      "product_id": 13,
+      "price": 4.5,
+      "stock": 10,
+      "category_name": "Drinks"
+    },
+    {
+      "name": "Heavy Cream 🥛",
+      "product_id": 15,
+      "price": 3.5,
+      "stock": 10,
+      "category_name": "Drinks"
+    }
+  ]
+}

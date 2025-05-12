@@ -1,0 +1,6 @@
+aiogram~=3.20.0.post0
+environs~=14.1.1
+redis
+SQLAlchemy~=2.0.40
+aiogram_dialog~=2.3.1
+asyncpg
