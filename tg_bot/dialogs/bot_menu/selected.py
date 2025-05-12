@@ -2,13 +2,13 @@ import logging
 
 from aiogram.types import CallbackQuery
 from aiogram_dialog import DialogManager
-from aiogram_dialog.widgets.kbd import Button, Back, Select
+from aiogram_dialog.widgets.kbd import Button, Select
 
 from tg_bot.db.db_repo import Repo
-from tg_bot.misc.states import MainMenuStates, CartStates, CatalogStates, states
+from tg_bot.misc.states import CartStates, CatalogStates, states
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.DEBUG)
 
 
 ################################## Main
@@ -58,16 +58,16 @@ async def on_buy_product(
     product_id = context.dialog_data.get("product_id")
 
     product_name = await repo.product_to_cart(session, int(product_id))
-    await callback.answer(f"Поместили в корзину {product_name}")
+    await callback.answer(f"Added to cart {product_name}")
 
 
-# Для переключения между След Пред
+# To switch between Next Prev
 async def new_info(callback: CallbackQuery, widget: Button, manager: DialogManager):
     group, name, action = callback.data.split(".")
 
     context = manager.current_context()
     product_id = int(context.dialog_data.get("product_id"))
-    # logger.debug(context.dialog_data.get("product_id_s"))
+
     id_index = context.dialog_data.get("product_id_s").index(product_id)
     amount = context.dialog_data.get("amount")
 
@@ -106,11 +106,7 @@ async def change_amount(
 ):
     action = callback.data
 
-    logger.debug(f"action: {action}")
-
     amount = {"minus": -1, "plus": 1}.get(action, 0)
-
-    logger.debug(f"amount: {amount}")
 
     repo: Repo = manager.middleware_data.get("repo")
     session = manager.middleware_data.get("session")
@@ -119,12 +115,10 @@ async def change_amount(
     product_id = context.dialog_data.get("product_id")
     action = await repo.change_amount_db(session, int(product_id), amount)
 
-    logger.debug(f"action: {action}")
-
     if action == "changed":
-        await callback.answer("Количество изменено!")
+        await callback.answer("Quantity changed!")
     if action == "removed":
-        await callback.answer("Удалено из корзины!")
+        await callback.answer("Removed from cart!")
         await manager.switch_to(CartStates.cart)
 
 
@@ -138,5 +132,12 @@ async def delete_amount(
     product_id = context.dialog_data.get("product_id")
     is_deleted = await repo.delete_amount_db(session, int(product_id))
     if is_deleted:
-        await callback.answer("Удалено из корзины!")
+        await callback.answer("Removed from cart!")
         await manager.switch_to(CartStates.cart)
+
+
+# TODO Buying products
+async def on_confirm_buy(
+    callback: CallbackQuery, widget: Button, manager: DialogManager
+):
+    await manager.switch_to(CartStates.confirm)

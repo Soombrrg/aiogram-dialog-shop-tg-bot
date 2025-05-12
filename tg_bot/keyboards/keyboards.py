@@ -1,6 +1,5 @@
 import operator
 
-from aiogram.types import InlineKeyboardMarkup
 from aiogram_dialog.widgets.kbd import (
     Group,
     Row,
@@ -22,19 +21,19 @@ def main_menu_keyboard():
     return Group(
         Row(
             Button(
-                Const("Товары 🍕"),
+                Const("Products 🍕"),
                 id="catalog_st.catalog",
                 on_click=selected.on_catalog,
             ),
-            Button(Const("Корзина 🛒"), id="cart_st.cart", on_click=selected.on_cart),
+            Button(Const("Cart 🛒"), id="cart_st.cart", on_click=selected.on_cart),
         ),
         Row(
-            Button(Const("О нас ℹ️"), id="main_st.about", on_click=selected.to_state),
+            Button(Const("About ℹ️"), id="main_st.about", on_click=selected.to_state),
             Button(
-                Const("Оплата 💰"), id="main_st.payment", on_click=selected.to_state
+                Const("Payment 💰"), id="main_st.payment", on_click=selected.to_state
             ),
         ),
-        Button(Const("Доставка ⛵"), id="main_st.delivery", on_click=selected.to_state),
+        Button(Const("Delivery ⛵"), id="main_st.delivery", on_click=selected.to_state),
         id="menu_id",
     )
 
@@ -49,12 +48,12 @@ def catalog_keyboard():
     return Group(
         Row(
             Button(
-                Const("Еда"),
+                Const("Meals"),
                 id="catalog_st.meals",
                 on_click=selected.on_chosen_category,
             ),
             Button(
-                Const("Напитки"),
+                Const("Drinks"),
                 id="catalog_st.drinks",
                 on_click=selected.on_chosen_category,
             ),
@@ -64,7 +63,7 @@ def catalog_keyboard():
                 Const("<< Back"),
                 id="main_st.main_menu",
             ),
-            Button(Const("Корзина 🛒"), id="cart_st.cart", on_click=selected.on_cart),
+            Button(Const("Cart 🛒"), id="cart_st.cart", on_click=selected.on_cart),
         ),
         id="catalog_id",
     )
@@ -85,66 +84,45 @@ def paginated_products(on_click):
     )
 
 
+def prev_next_btn(id_str: str):
+    return Row(
+        Button(
+            Const("<< Prev."),
+            id=id_str + ".prev",
+            on_click=selected.new_info,
+        ),
+        Button(
+            Const("Next. >>"),
+            id=id_str + ".next",
+            on_click=selected.new_info,
+        ),
+    )
+
+
 def product_info_keyboard():
     return Group(
         Row(
             Button(
-                Const("Купить"),
+                Const("Buy"),
                 id="add_to_cart",
                 on_click=selected.on_buy_product,
             ),
-            Button(Const("Корзина 🛒"), id="cart_st.cart", on_click=selected.on_cart),
+            Button(Const("Cart 🛒"), id="cart_st.cart", on_click=selected.on_cart),
         ),
-        Row(
-            Button(
-                Const("<< Пред."),
-                id="catalog_st.product_info.prev",
-                on_click=selected.new_info,
-            ),
-            Button(
-                Const("След. >>"),
-                id="catalog_st.product_info.next",
-                on_click=selected.new_info,
-            ),
-        ),
+        prev_next_btn("catalog_st.product_info"),
     )
 
 
 def enter_amount_keyboard():
     return Group(
         Row(
-            Button(Const("Удалить"), id="delete", on_click=selected.delete_amount),
+            Button(Const("Delete"), id="delete", on_click=selected.delete_amount),
             Button(Const("-1"), id="minus", on_click=selected.change_amount),
             Button(Const("+1"), id="plus", on_click=selected.change_amount),
         ),
-        Row(
-            Button(
-                Const("<< Пред."),
-                id="cart_st.enter_amount.prev",
-                on_click=selected.new_info,
-            ),
-            Button(
-                Const("След. >>"),
-                id="cart_st.enter_amount.next",
-                on_click=selected.new_info,
-            ),
-        ),
+        prev_next_btn("cart_st.enter_amount"),
         Row(
             Back(Const("<<")),
+            Button(Const("Buy"), id="buy", on_click=selected.on_confirm_buy),
         ),
     )
-
-
-# def cart_keyboard():
-#     return ScrollingGroup(
-#         Select(
-#             Format("{item.name}"),
-#             id="scroll_products",
-#             item_id_getter=operator.attrgetter("product_id"),
-#             items="products",
-#             on_click=on_click,
-#         ),
-#         id="products_id",
-#         width=1,
-#         height=SCROLLING_HEIGHT,
-#     )

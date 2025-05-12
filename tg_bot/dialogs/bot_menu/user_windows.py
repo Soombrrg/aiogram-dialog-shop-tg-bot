@@ -12,7 +12,7 @@ from tg_bot.misc.states import MainMenuStates, CatalogStates, CartStates
 def main_window() -> Window:  # main
     return Window(
         DynamicMedia("photo"),
-        Const("Добро пожаловать!"),
+        Const("Welcome!"),
         keyboards.main_menu_keyboard(),
         state=MainMenuStates.main_menu,
         getter=getters.get_image,
@@ -22,7 +22,7 @@ def main_window() -> Window:  # main
 def about_window():
     return Window(
         DynamicMedia("photo"),
-        Const("О нас!"),
+        Const("About!"),
         keyboards.back_btn(),
         state=MainMenuStates.about,
         getter=getters.get_image,
@@ -32,7 +32,7 @@ def about_window():
 def payment_window():
     return Window(
         DynamicMedia("photo"),
-        Const("Оплата!"),
+        Const("Payment!"),
         keyboards.back_btn(),
         state=MainMenuStates.payment,
         getter=getters.get_image,
@@ -42,16 +42,11 @@ def payment_window():
 def delivery_window():
     return Window(
         DynamicMedia("photo"),
-        Const("Доставка!"),
+        Const("Delivery!"),
         keyboards.back_btn(),
         state=MainMenuStates.delivery,
         getter=getters.get_image,
     )
-
-
-################################ on_process_result
-async def back_process_result(data: Data, result: dict, manager: DialogManager):
-    await manager.switch_to(MainMenuStates.main_menu)
 
 
 ################################ Catalog Windows
@@ -88,14 +83,15 @@ def meals_window():
     )
 
 
+# TODO product pictures
 def product_info_window():
     return Window(
         # DynamicMedia("photo"),
         Format(
             """
-Продукт: {product.name}
-Цена: {product.price}
-На складе: {product.stock}
+Products: {product.name}
+Price: {product.price}
+Stock: {product.stock}
 """
         ),
         keyboards.product_info_keyboard(),
@@ -111,7 +107,7 @@ def product_info_window():
 def cart_window():  # cart_main
     return Window(
         DynamicMedia("photo"),
-        Const("Корзина:"),
+        Const("Cart:"),
         keyboards.paginated_products(selected.on_buy_info),
         Cancel(
             Const("<< Back"),
@@ -127,9 +123,9 @@ def enter_amount_window():
         # DynamicMedia("photo"),
         Format(
             """
-Продукт: {product.name}
+Product: {product.name}
 {product.price}$ x {quantity} = {products_cost}$
-Общая стоимость товаров в корзине {total_cost}$
+Total cost of items in the cart {total_cost}$
 """
         ),
         keyboards.enter_amount_keyboard(),
@@ -140,4 +136,6 @@ def enter_amount_window():
 
 # TODO confirm_buy_window
 def confirm_buy_window():
-    pass
+    return Window(
+        state=CartStates.confirm,
+    )
