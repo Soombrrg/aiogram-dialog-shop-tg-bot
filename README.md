@@ -1,8 +1,9 @@
 <h1 align="center">AiogramDialogShopBot</h1>
 <h2 align="center">Starting</h2>
 In .env:
+
 ```
-BOT_TOKEN=123456:Your-Token
+BOT_TOKEN=123456:Your-Token 
 ADMINS=123456, 789012
 USE_REDIS=False
 ```
